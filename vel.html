@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentine Surprise</title>
+    <style>
+        :root {
+            --primary-red: #d63031;
+            --bg-pink: #fbc2eb;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--primary-red);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .screen { display: none; }
+        .active { display: block; animation: fadeIn 0.5s ease-in; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Step 1: Gift Box */
+        .gift-img { width: 150px; cursor: pointer; transition: transform 0.3s; }
+        .gift-img:hover { transform: scale(1.1) rotate(5deg); }
+
+        /* Step 2: Menu */
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .menu-item {
+            background: #fff0f0;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+        .menu-item:hover { border-color: var(--primary-red); transform: translateY(-5px); }
+
+        /* Step 3: Sections */
+        .back-btn {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .gallery img { width: 100%; border-radius: 10px; border: 2px solid #eee; }
+
+        .letter-box {
+            text-align: left;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #fffafa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        audio { width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="screen-start" class="screen active">
+            <h2>Happy Valentine's Day!</h2>
+            <p>I have a gift for you...</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png" class="gift-img" onclick="nextScreen('screen-menu')">
+            <p><small>Tap to open</small></p>
+        </div>
+
+        <div id="screen-menu" class="screen">
+            <h3>Presents for You</h3>
+            <div class="menu-grid">
+                <div class="menu-item" onclick="nextScreen('screen-music')">🎵 Music</div>
+                <div class="menu-item" onclick="nextScreen('screen-gallery')">📸 Photos</div>
+                <div class="menu-item" onclick="nextScreen('screen-letter')">✉️ Letter</div>
+                <div class="menu-item" onclick="alert('I Love You! ❤️')">💝 More</div>
+            </div>
+        </div>
+
+        <div id="screen-music" class="screen">
+            <h3>Our Favorite Song</h3>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW16am8xaGZ2eXp4eHh4eHh4eHh4eHh4eHh4eHh4eHgmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PXM/iCVz2SSGuJewWUBfnc/giphy.gif" width="100">
+            <audio controls>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <br><button class="back-btn" onclick="nextScreen('screen-menu')">Back</button>
+        </div>
+
+        <div id="screen-gallery" class="screen">
+            <h3>Memories Together</h3>
+            <div class="gallery">
+                <img src="https://via.placeholder.com/150/ffcccc" alt="Photo 1">
+                <img src="https://via.placeholder.com/150/ffaaaa" alt="Photo 2">
+                <img src="https://via.placeholder.com/150/ff8888" alt="Photo 3">
+                <img src="https://via.placeholder.com/150/ff6666" alt="Photo 4">
+            </div>
+            <button class="back-btn" onclick="nextScreen('screen-menu')">Back</button>
+        </div>
+
+        <div id="screen-letter" class="screen">
+            <h3>My Special Letter</h3>
+            <div class="letter-box">
+                Dear Love,<br><br>
+                Happy Valentine's Day! I just wanted to say that you make every day special. Thank you for being by my side. I hope you liked this little surprise!<br><br>
+                Forever yours, <br>❤️
+            </div>
+            <button class="back-btn" onclick="nextScreen('screen-menu')">Back</button>
+        </div>
+    </div>
+
+    <script>
+        function nextScreen(screenId) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(s => s.classList.remove('active'));
+
+            // Show target screen
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
